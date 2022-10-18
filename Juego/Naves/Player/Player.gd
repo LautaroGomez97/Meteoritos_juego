@@ -11,6 +11,10 @@ export var potencia_rotacion:int = 280
 var empuje:Vector2 = Vector2.ZERO
 var dir_rotacion:int = 0
 
+## Atributos Onready
+onready var canion:Canion = $Canion
+
+
 ## Metodos
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 	apply_central_impulse(empuje.rotated(rotation))
@@ -21,7 +25,19 @@ func _process(delta: float) -> void:
 
 func player_input():
 	#Empuje
-	empuje = Vector2.ZERO
+	# ---- #
+	
+	# Rotation
+	# -----#
+	
+	#Disparo
+	if Input.is_action_pressed("disparo_principal"):
+		canion.set_esta_disparando(true)
+	
+	if Input.is_action_just_released("disparo_principal"):
+		canion.set_esta_disparando(true)
+
+	empuje = Vector2.ZERO	
 	if Input.is_action_pressed("mover_adelante"):
 		empuje = Vector2(potencia_motor, 0)
 	elif Input.is_action_pressed("mover_atras"):
