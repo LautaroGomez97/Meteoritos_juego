@@ -23,6 +23,8 @@ onready var estela:Estela = $EstelaPuntoInicio/Trail2D
 onready var motor_sfx:Motor = $MotorSFX
 onready var colisionador:CollisionShape2D = $CollisionShape2D
 
+
+
 ## Señales internas
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	if anim_name == "spawn":
@@ -42,6 +44,7 @@ func controlador_estados(nuevo_estado: int) -> void:
 		ESTADO.MUERTO:
 			colisionador.set_deferred("disabled", true)
 			canion.set_puede_disparar(true)
+			Eventos.emit_signal("nave_destruida", global_position, 3)
 			queue_free()
 		_:
 			printerr("Error de estado")
@@ -112,6 +115,6 @@ func player_input():
 	elif Input.is_action_pressed("rotar_horario"):
 		dir_rotacion += 1 
 
-
-
+func destruir() -> void:
+	controlador_estados(ESTADO.MUERTO)
 

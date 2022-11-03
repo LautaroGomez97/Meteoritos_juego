@@ -11,5 +11,5 @@ dest_files=[ "res://.import/laserDisparo.ogg-2e2fc40778b425be4cb9744b695f2a83.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
