@@ -11,7 +11,7 @@ script = ExtResource( 2 )
 explosion = ExtResource( 4 )
 
 [node name="EnemigoDummy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1316.63, 274.357 )
+position = Vector2( 1289.9, 281.484 )
 z_as_relative = false
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
