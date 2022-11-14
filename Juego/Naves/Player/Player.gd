@@ -50,12 +50,6 @@ func esta_input_activo() -> bool:
 		return false
 	return true
 	
-	
-## Señales internas
-func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
-	if anim_name == "spawn":
-		controlador_estados(ESTADO.VIVO)
-
 
 ## Metodos
 func _ready() -> void:
@@ -85,11 +79,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("escudo") and not escudo.get_esta_activado():
 		escudo.activar()
 
-func _integrate_forces(state: Physics2DDirectBodyState) -> void:
+func _integrate_forces(_state: Physics2DDirectBodyState) -> void:
 	apply_central_impulse(empuje.rotated(rotation))
 	apply_torque_impulse(dir_rotacion * potencia_rotacion)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	player_input()
 
 func player_input():
@@ -128,5 +122,14 @@ func recibir_danio(danio: float) -> void:
 	if hitpoints <= 0.0:
 		destruir()
 	impacto_sfx.play()
+# Escudo Control
+	
+## Señales internas
+func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	if anim_name == "spawn":
+		controlador_estados(ESTADO.VIVO)
 
-## Escudo Control
+func _on_body_entered(body: Node) -> void:
+	if  body is Meteorito:
+		body.destruir()
+		destruir()
